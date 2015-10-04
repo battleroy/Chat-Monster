@@ -6774,6 +6774,9 @@ button.close {
   background-color: #343434;
 }
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background: #343434;
   font-size: 11px;
 }

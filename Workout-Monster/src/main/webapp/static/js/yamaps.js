@@ -1,7 +1,8 @@
+
+
 ymaps.ready(initMap);
 
 var map;
-var placemark;
 function initMap() {
    map = new ymaps.Map("map", {
       center: [55.76, 37.64], 
