@@ -1,53 +1,78 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Bootstrap 101 Template</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-      <style>
-         body
-         {
-            background-color: #195063
-         }
-      </style>
-   </head>
-   <body>
-      <nav class="navbar navbar-default">
-         <div class="container">
-            <div class="navbar-header">
-               <a class="navbar-brand" href="#">Workout Monster</a>
+    <head>
+       <title>Sign Up</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+       <link href="../../static/css/app.css" rel="stylesheet">
+       <script src="https://code.jquery.com/jquery.js"></script>
+       <script src="../../static/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img src="../../static/images/logo.png" alt="Workout Monster">
+                    </a>
+                </div>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="search" class="form-control form-search" placeholder="Minsk, BY">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Search for spots!</button>
+                </form>
+                <form class="pull-right">
+                    <button type="button" class="navbar-btn btn btn-primary login-button">Log In</button>
+                </form>
+            </nav>
+            <div class="page-header">
+                <h1>Signing up <small>You are about good to go.</small></h1>
             </div>
-         </div>
-      </nav>
-      <div class="container">
-         <div class="row">
-            <div class="col-md-3 col-md-push-3">
-               <input type="text" class="form-control" placeholder="Login">
+            <div class="row">
+                <div class="col-md-4 col-md-push-4">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputFirstName">Fitst Name</label>
+                            <input type="text" class="form-control" id="inputFirstName" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLastName">Last Name</label>
+                            <input type="text" class="form-control" id="inputLastName" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLogin">Login</label>
+                            <input type="text" class="form-control" id="inputLogin" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>            
+        </div>
+        <footer class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 sitemap">
+                        <h4>Sitemap</h4>
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="col-md-4 social">
+                    </div>
+                    <div class="col-md-3 col-md-push-2 footer-logo">
+                        <a href="/"><img src="../../static/images/logo.png" alt="Workout Monster"></a>
+                        <p>
+                            Copyright 2015 Yauheni Chasavitsin. <span class="glyphicon glyphicon-menu-right"></span><a href="http://github.com/battleroy"> GitHub</a>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3 col-md-push-3">
-               <input type="password" class="form-control" placeholder="Password">
-            </div>
-         </div>
-         <br>
-         <div class="row">
-            <div class="col-md-3 col-md-push-3">
-               <input type="text" class="form-control" placeholder="First Name">
-            </div>
-            <div class="col-md-3 col-md-push-3">
-               <input type="password" class="form-control" placeholder="Last Name">
-            </div>
-         </div>
-         <br>
-         <div class="row">
-            <div class="col-md-2 col-md-push-5">
-               <button type="submit" class="btn btn-primary center-block">Submit</button>
-            </div>
-         </div>
-      </div>
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://code.jquery.com/jquery.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files 
-            as needed -->
-      <script src="../js/bootstrap.min.js"></script>
-   </body>
+        </footer>
+    </body>
 </html>

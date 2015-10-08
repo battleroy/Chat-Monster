@@ -1,39 +1,36 @@
 @import "bootstrap/bootstrap.less";
 @import "appvariables.less";
 
-.container {
-	
-	.navbar-form {
+body {
+	padding-bottom: @footer-height + 10px;
+	.container {
+		
+		.navbar-form {
 
-		.form-search {
-			width: 300px;
+			.form-search {
+				width: 300px;
+			}
+
+		}
+
+		.pull-right {
+			margin-right: 5px;
 		}
 
 	}
 
-	.pull-right {
-		margin-right: 5px;
-	}
-
-	.heading {
-
-	}
-
 }
 
-#logInButton {
+.login-button {
 	background-color: @navbar-default-bg;
 }
 
 footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
 	background: @navbar-default-bg;
 	font-size: 11px;
 
 	.container {
-		height: 110px;
+		height: @footer-height;
 		padding: 10px 0;
 
 		p {
@@ -45,4 +42,8 @@ footer {
 #map {
 	height: 400px;
 	margin-right: 15px;
+}
+
+textarea {
+	resize: none;
 }

@@ -6764,24 +6764,24 @@ button.close {
     display: none !important;
   }
 }
-.container .navbar-form .form-search {
+body {
+  padding-bottom: 90px;
+}
+body .container .navbar-form .form-search {
   width: 300px;
 }
-.container .pull-right {
+body .container .pull-right {
   margin-right: 5px;
 }
-#logInButton {
+.login-button {
   background-color: #343434;
 }
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   background: #343434;
   font-size: 11px;
 }
 footer .container {
-  height: 110px;
+  height: 80px;
   padding: 10px 0;
 }
 footer .container p {
@@ -6790,4 +6790,7 @@ footer .container p {
 #map {
   height: 400px;
   margin-right: 15px;
+}
+textarea {
+  resize: none;
 }

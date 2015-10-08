@@ -28,7 +28,7 @@
 				</form>
 				<form class="pull-right">
 					<button type="button" class="navbar-btn btn btn-primary">Sign Up</button>
-					<button type="button" id="logInButton" class="navbar-btn btn btn-primary">Log In</button>
+					<button type="button" class="navbar-btn btn btn-primary login-button">Log In</button>
 				</form>
 			</nav>
 			<div class="panel panel-default panel-body">
@@ -171,7 +171,7 @@
 				</div>
 			</div>
 		</div>
-		<footer>
+		<footer class="navbar navbar-default navbar-fixed-bottom">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 sitemap">
@@ -181,7 +181,6 @@
 						<a href="#">Contact</a>
 					</div>
 					<div class="col-md-4 social">
-						
 					</div>
 					<div class="col-md-3 col-md-push-2 footer-logo">
 						<a href="/"><img src="static/images/logo.png" alt="Workout Monster"></a>
@@ -193,5 +192,4 @@
 			</div>
 		</footer>
 	</body>
-
 </html>
