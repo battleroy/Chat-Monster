@@ -1,8 +1,21 @@
 package by.bsu.fpmi.battleroy.model;
 
-public class Review {
+import javax.persistence.*;
+import java.io.Serializable;
 
-    private User creator;
+@Entity
+@Table(name = "REVIEW")
+public class Review implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "REVIEW_ID")
+    private long id;
+
+    @Column(name = "REVIEW_CREATOR", nullable = false)
+    private Member creator;
+
+    @Column(name = "REVIEW_TEXT", nullable = false)
     private String text;
 
     public String getText() {
@@ -13,11 +26,11 @@ public class Review {
         this.text = text;
     }
 
-    public User getCreator() {
+    public Member getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(Member creator) {
         this.creator = creator;
     }
 }

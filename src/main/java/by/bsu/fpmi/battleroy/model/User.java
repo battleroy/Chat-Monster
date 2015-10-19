@@ -1,43 +1,32 @@
 package by.bsu.fpmi.battleroy.model;
 
-public class User {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-    private String firstName;
-    private String lastName;
-    private String nickname;
-    private String login;
+@Entity
+@Table(name = "USER_CREDENTIALS")
+public class User implements Serializable {
+
+    static final long serialVersionUID = 1L;
+
+    @Id
+    @Column(name = "USER_NAME", nullable = false)
+    private String username;
+
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    public String getFirstName() {
-        return firstName;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserRole> userRoles = new HashSet<UserRole>();
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -46,5 +35,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }

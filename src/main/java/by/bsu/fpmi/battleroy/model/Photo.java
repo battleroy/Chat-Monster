@@ -1,17 +1,30 @@
 package by.bsu.fpmi.battleroy.model;
 
-import java.awt.image.BufferedImage;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class Photo {
+@Entity
+@Table(name = "PHOTO")
+public class Photo implements Serializable {
 
-    private BufferedImage image;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PHOTO_ID")
+    private long id;
 
-    public BufferedImage getImage() {
-        return image;
+    @Column(name = "PHOTO_IMAGE_BYTES", nullable = false)
+    private byte[] imageBytes;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SPOT_ID", nullable = false)
+    private Spot spot;
+
+    public byte[] getImageBytes() {
+        return imageBytes;
     }
 
-    public void setImage(BufferedImage image) {
-        this.image = image;
+    public void setImageBytes(byte[] imageBytes) {
+        this.imageBytes = imageBytes;
     }
 
 }

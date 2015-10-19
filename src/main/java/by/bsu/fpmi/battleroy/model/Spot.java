@@ -1,15 +1,40 @@
 package by.bsu.fpmi.battleroy.model;
 
-public class Spot {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@Table(name = "SPOT", uniqueConstraints = @UniqueConstraint(columnNames = {"latitude", "longitude"}))
+public class Spot implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "SPOT_ID")
+    private long id;
+
+    @Column(name = "SPOT_NAME", nullable = false)
     private String name;
+
+    @Column(name = "SPOT_ADDRESS")
     private String address;
-    private User creator;
+
+    @Column(name = "SPOT_LATITUDE", nullable = false)
     private double latitude;
+
+    @Column(name = "SPOT_LONGITUDE", nullable = false)
     private double longitude;
-    private Review[] reviews;
-    private Photo[] photos;
-    private Photo thumbnail;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID", nullable = false)
+    private Member creator;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "review", cascade = CascadeType.ALL)
+    private Set<Review> reviews = new HashSet<Review>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "review", cascade = CascadeType.ALL)
+    private Set<Photo> photos = new HashSet<Photo>();
 
     public String getName() {
         return name;
@@ -27,11 +52,11 @@ public class Spot {
         this.address = address;
     }
 
-    public User getCreator() {
+    public Member getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(Member creator) {
         this.creator = creator;
     }
 
@@ -51,27 +76,20 @@ public class Spot {
         this.longitude = longitude;
     }
 
-    public Review[] getReviews() {
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Review[] reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
 
-    public Photo[] getPhotos() {
+    public Set<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(Photo[] photos) {
+    public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
     }
 
-    public Photo getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(Photo thumbnail) {
-        this.thumbnail = thumbnail;
-    }
 }
