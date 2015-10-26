@@ -1,0 +1,50 @@
+package by.bsu.fpmi.battleroy.services.impl;
+
+import by.bsu.fpmi.battleroy.dao.UserDao;
+import by.bsu.fpmi.battleroy.model.User;
+import by.bsu.fpmi.battleroy.model.UserRole;
+import by.bsu.fpmi.battleroy.services.UserService;
+import by.bsu.fpmi.battleroy.util.CustomPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+@Service("userService")
+@Transactional
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private CustomPasswordEncoder passwordEncoder;
+
+    @Override
+    public void update(User user) {
+
+    }
+
+    @Override
+    public User readByUserName(String userName) {
+        return userDao.findByName(userName);
+    }
+
+    @Override
+    public User registerNewUserAccount(User newUser) {
+        if (usernameExists(newUser.getUsername())) {
+            throw new NullPointerException("There is an account with that username: " + newUser.getUsername());
+        }
+        final User user = new User();
+
+        user.setUsername(newUser.getUsername());
+        user.setPassword(passwordEncoder.encodePassword(newUser.getPassword(), newUser.getUsername()));
+        user.getUserRoles().add(new UserRole(user, "USER"));
+        return userDao.save(user);
+    }
+
+    private boolean usernameExists(final String name) {
+        final User user = userDao.findByName(name);
+        return user != null;
+    }
+}

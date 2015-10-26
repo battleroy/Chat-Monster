@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "SPOT", uniqueConstraints = @UniqueConstraint(columnNames = {"latitude", "longitude"}))
+@Table(name = "SPOT", uniqueConstraints = @UniqueConstraint(columnNames = {"SPOT_LATITUDE", "SPOT_LONGITUDE"}))
 public class Spot implements Serializable {
 
     @Id
@@ -17,7 +17,7 @@ public class Spot implements Serializable {
     @Column(name = "SPOT_NAME", nullable = false)
     private String name;
 
-    @Column(name = "SPOT_ADDRESS")
+    @Column(name = "SPOT_ADDRESS", nullable = true)
     private String address;
 
     @Column(name = "SPOT_LATITUDE", nullable = false)
@@ -27,13 +27,13 @@ public class Spot implements Serializable {
     private double longitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MEMBER_ID", nullable = false)
+    @JoinColumn(name = "FK_MEMBER_ID", nullable = false)
     private Member creator;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "review", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "spot", cascade = CascadeType.ALL)
     private Set<Review> reviews = new HashSet<Review>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "review", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "spot", cascade = CascadeType.ALL)
     private Set<Photo> photos = new HashSet<Photo>();
 
     public String getName() {

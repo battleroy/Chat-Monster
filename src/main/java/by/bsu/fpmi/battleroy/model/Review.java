@@ -12,8 +12,13 @@ public class Review implements Serializable {
     @Column(name = "REVIEW_ID")
     private long id;
 
-    @Column(name = "REVIEW_CREATOR", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_REVIEW_CREATOR", nullable = false)
     private Member creator;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_SPOT_ID", nullable = false)
+    private Spot spot;
 
     @Column(name = "REVIEW_TEXT", nullable = false)
     private String text;

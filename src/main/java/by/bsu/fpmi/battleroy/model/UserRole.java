@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "USER_ROLE", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "username"}))
+@Table(name = "USER_ROLE", uniqueConstraints = @UniqueConstraint(columnNames = {"ROLE", "FK_USER_NAME"}))
 public class UserRole implements Serializable {
 
     static final long serialVersionUID = 1L;
@@ -18,8 +18,17 @@ public class UserRole implements Serializable {
     private String role;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_NAME", nullable = false)
+    @JoinColumn(name = "FK_USER_NAME", nullable = false)
     private User user;
+
+    public UserRole() {
+
+    }
+
+    public UserRole(User user, String role) {
+        this.user = user;
+        this.role = role;
+    }
 
     public long getId() {
         return id;

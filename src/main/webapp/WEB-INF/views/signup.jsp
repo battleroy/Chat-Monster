@@ -1,78 +1,54 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html>
-    <head>
-       <title>Sign Up</title>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
-       <link href="../../static/css/app.css" rel="stylesheet">
-       <script src="https://code.jquery.com/jquery.js"></script>
-       <script src="../../static/js/bootstrap.min.js"></script>
-    </head>
+<head>
+    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/app.css" rel="stylesheet">
+    <script src="../../static/js/jquery.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+</head>
 
-    <body>
-        <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        <img src="../../static/images/logo.png" alt="Workout Monster">
-                    </a>
-                </div>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="search" class="form-control form-search" placeholder="Minsk, BY">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Search for spots!</button>
-                </form>
-                <form class="pull-right">
-                    <button type="button" class="navbar-btn btn btn-primary login-button">Log In</button>
-                </form>
-            </nav>
-            <div class="page-header">
-                <h1>Signing up <small>You are about good to go.</small></h1>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-md-push-4">
-                    <form>
-                        <div class="form-group">
-                            <label for="inputFirstName">Fitst Name</label>
-                            <input type="text" class="form-control" id="inputFirstName" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputLastName">Last Name</label>
-                            <input type="text" class="form-control" id="inputLastName" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputLogin">Login</label>
-                            <input type="text" class="form-control" id="inputLogin" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>            
+<body>
+    <div class="container">
+        <c:import url="header.jsp"/>
+        <div class="page-header">
+            <h1>Signing up
+                <small>You are about good to go.</small>
+            </h1>
         </div>
-        <footer class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 sitemap">
-                        <h4>Sitemap</h4>
-                        <a href="#">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Contact</a>
-                    </div>
-                    <div class="col-md-4 social">
-                    </div>
-                    <div class="col-md-3 col-md-push-2 footer-logo">
-                        <a href="/"><img src="../../static/images/logo.png" alt="Workout Monster"></a>
-                        <p>
-                            Copyright 2015 Yauheni Chasavitsin. <span class="glyphicon glyphicon-menu-right"></span><a href="http://github.com/battleroy"> GitHub</a>
-                        </p>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-md-4 col-md-push-4">
+                <c:url var="signupUrl" value="/register"/>
+                <form:form modelAttribute="user" action="${signupUrl}" method="POST">
+                    <spring:bind path="username">
+                        <div class="form-group">
+                            <form:label path="username">Username</form:label>
+                            <form:input type="text" class="form-control" placeholder="Email" path="username"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="password">Password</form:label>
+                            <form:input type="password" class="form-control" placeholder="Password"
+                                        path="password"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="signup-submit">Submit</button>
+                        <div class="form-group" style="margin-top: 24px;">
+                            <form:errors path="username" class="form-group">
+                                <div class="alert alert-danger" role="alert">
+                                    <b>Oops! </b>User with such name already exists
+                                </div>
+                            </form:errors>
+                        </div>
+                    </spring:bind>
+                </form:form>
             </div>
-        </footer>
-    </body>
+        </div>
+    </div>
+    <c:import url="footer.jsp"/>
+</body>
 </html>

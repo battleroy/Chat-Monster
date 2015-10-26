@@ -3,6 +3,8 @@ package by.bsu.fpmi.battleroy.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "MEMBER")
@@ -18,6 +20,9 @@ public class Member implements Serializable {
 
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "creator", cascade = CascadeType.ALL)
+    private Set<Spot> spots = new HashSet<Spot>();
 
     public long getId() {
         return id;
@@ -41,5 +46,13 @@ public class Member implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Spot> getSpots() {
+        return spots;
+    }
+
+    public void setSpots(Set<Spot> spots) {
+        this.spots = spots;
     }
 }

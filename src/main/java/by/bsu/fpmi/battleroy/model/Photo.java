@@ -16,7 +16,7 @@ public class Photo implements Serializable {
     private byte[] imageBytes;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SPOT_ID", nullable = false)
+    @JoinColumn(name = "FK_SPOT_ID", nullable = false)
     private Spot spot;
 
     public byte[] getImageBytes() {

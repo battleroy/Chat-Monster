@@ -1,3 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,66 +9,40 @@
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
        <link href="../../static/css/app.css" rel="stylesheet">
-       <script src="https://code.jquery.com/jquery.js"></script>
+       <script src="../../static/js/jquery.js"></script>
        <script src="../../static/js/bootstrap.min.js"></script>
     </head>
 
     <body>
         <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        <img src="../../static/images/logo.png" alt="Workout Monster">
-                    </a>
-                </div>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="search" class="form-control form-search" placeholder="Minsk, BY">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Search for spots!</button>
-                </form>
-                <form class="pull-right">
-                    <button type="button" class="navbar-btn btn btn-primary">Sign Up</button>
-                </form>
-            </nav>
+            <c:import url="header.jsp"/>
             <div class="page-header">
                 <h1>Logging in <small>Or you can sign up, if you are not with us yet.</small></h1>
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-push-4">
-                    <form>
+                    <c:url var="loginUrl" value="/j_spring_security_check"/>
+                    <form action="${loginUrl}" method="POST">
                         <div class="form-group">
-                            <label for="inputLogin">Login</label>
-                            <input type="text" class="form-control" id="inputLogin" placeholder="Email">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Email"/>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="signup-submit">Submit</button>
+                        <c:if test="${not empty error}">
+                            <div class="form-group" style="margin-top: 24px;">
+                                <div class="alert alert-danger" role="alert">
+                                    <b>Oops! </b>Wrong user name or password
+                                </div>
+                            </div>
+                        </c:if>
                     </form>
                 </div>
             </div>            
         </div>
-        <footer class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 sitemap">
-                        <h4>Sitemap</h4>
-                        <a href="#">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Contact</a>
-                    </div>
-                    <div class="col-md-4 social">
-                    </div>
-                    <div class="col-md-3 col-md-push-2 footer-logo">
-                        <a href="/"><img src="../../static/images/logo.png" alt="Workout Monster"></a>
-                        <p>
-                            Copyright 2015 Yauheni Chasavitsin. <span class="glyphicon glyphicon-menu-right"></span><a href="http://github.com/battleroy"> GitHub</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <c:import url="footer.jsp"/>
     </body>
 </html>
