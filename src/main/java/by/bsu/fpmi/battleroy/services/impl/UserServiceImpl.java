@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Set;
 
 @Service("userService")
 @Transactional
@@ -31,6 +32,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Set<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+    @Override
     public User registerNewUserAccount(User newUser) {
         if (usernameExists(newUser.getUsername())) {
             throw new NullPointerException("There is an account with that username: " + newUser.getUsername());
@@ -39,6 +45,8 @@ public class UserServiceImpl implements UserService {
 
         user.setUsername(newUser.getUsername());
         user.setPassword(passwordEncoder.encodePassword(newUser.getPassword(), newUser.getUsername()));
+        user.setFirstName(newUser.getFirstName());
+        user.setLastName(newUser.getLastName());
         user.getUserRoles().add(new UserRole(user, "USER"));
         return userDao.save(user);
     }

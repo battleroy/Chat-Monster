@@ -27,14 +27,22 @@ public class Spot implements Serializable {
     private double longitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_MEMBER_ID", nullable = false)
-    private Member creator;
+    @JoinColumn(name = "FK_USER_ID", nullable = false)
+    private User creator;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "spot", cascade = CascadeType.ALL)
     private Set<Review> reviews = new HashSet<Review>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "spot", cascade = CascadeType.ALL)
     private Set<Photo> photos = new HashSet<Photo>();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -52,11 +60,11 @@ public class Spot implements Serializable {
         this.address = address;
     }
 
-    public Member getCreator() {
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(Member creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 

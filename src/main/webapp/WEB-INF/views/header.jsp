@@ -23,6 +23,7 @@
             <a role="button" class="navbar-btn btn btn-primary login-button" href="${login_link}">Log In</a>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
+            <span class="label label-default">${sessionScope.user}</span>
             <a role="button" class="navbar-btn btn btn-primary" href="${logout_link}">Log Out</a>
         </sec:authorize>
     </form>

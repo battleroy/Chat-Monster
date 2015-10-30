@@ -28,13 +28,22 @@
                 <form:form modelAttribute="user" action="${signupUrl}" method="POST">
                     <spring:bind path="username">
                         <div class="form-group">
-                            <form:label path="username">Username</form:label>
-                            <form:input type="text" class="form-control" placeholder="Email" path="username"/>
+                            <form:label path="username">User name</form:label>
+                            <form:input type="text" class="form-control" placeholder="Usr123" path="username"/>
                         </div>
                         <div class="form-group">
                             <form:label path="password">Password</form:label>
                             <form:input type="password" class="form-control" placeholder="Password"
                                         path="password"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="firstName">First name</form:label>
+                            <form:input type="text" class="form-control" placeholder="Mike" path="firstName"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="lastName">Last name</form:label>
+                            <form:input type="text" class="form-control" placeholder="Mikeoff"
+                                        path="lastName"/>
                         </div>
                         <button type="submit" class="btn btn-primary" id="signup-submit">Submit</button>
                         <div class="form-group" style="margin-top: 24px;">

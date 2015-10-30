@@ -14,7 +14,7 @@ public class Review implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_REVIEW_CREATOR", nullable = false)
-    private Member creator;
+    private User creator;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_SPOT_ID", nullable = false)
@@ -22,6 +22,16 @@ public class Review implements Serializable {
 
     @Column(name = "REVIEW_TEXT", nullable = false)
     private String text;
+
+    public Review() {
+
+    }
+
+    public Review(User creator, Spot spot, String text) {
+        this.creator = creator;
+        this.spot = spot;
+        this.text = text;
+    }
 
     public String getText() {
         return text;
@@ -31,11 +41,27 @@ public class Review implements Serializable {
         this.text = text;
     }
 
-    public Member getCreator() {
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(Member creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Spot getSpot() {
+        return spot;
+    }
+
+    public void setSpot(Spot spot) {
+        this.spot = spot;
     }
 }

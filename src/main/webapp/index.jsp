@@ -11,6 +11,7 @@
 	<link href="static/css/app.css" rel="stylesheet">
 	<script src="static/js/jquery.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/deleter.js"></script>
 	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 	<script src="static/js/yamaps.js"></script>
 </head>
@@ -20,139 +21,46 @@
 	<c:import url="WEB-INF/views/header.jsp"/>
 	<sec:authorize access="isAuthenticated()">
         <div class="panel panel-default panel-body">
-            <button type="button" class="btn btn-default">
+            <a type="button" class="btn btn-default" href="<c:url value="/myspots"/>">
                 <span class="glyphicon glyphicon-book"></span>
                 My Spots
-            </button>
-            <button type="button" class="btn btn-default">
+            </a>
+            <a type="button" class="btn btn-default" href="<c:url value="/newspot"/>">
                 <span class="glyphicon glyphicon-plus"></span>
-                Add Spot
-            </button>
+                New Spot
+            </a>
         </div>
     </sec:authorize>
 	<div class="row">
 		<div class="row">
 			<div class="col-md-7">
-				<div class="col-md-12">
-					<div class="thumbnail">
-						<img src="http://placehold.it/512x128" alt="512x128">
-						<table class="table">
-							<tbody>
-							<tr>
-								<td><span class="label label-default">Added By</span></td>
-								<td><a href="#">Admin123</a></td>
-							</tr>
-							<tr>
-								<td><span class="label label-default">Address</span></td>
-								<td>
-									<p>Fisherman's Wharf, Russian Hill
-										1323 Columbus Ave
-										San Francisco, CA 94133
-										Phone number (415) 292-4888
-									</p>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						<button type="button" class="btn btn-default center-block">Reviews</button>
+				<c:forEach var="spot" items="${spots}">
+					<div class="col-md-12">
+						<div class="thumbnail">
+							<img src="http://placehold.it/512x128" alt="512x128">
+							<table class="table">
+								<tbody>
+								<tr>
+									<td><span class="label label-default">Added By</span></td>
+									<td><a href="#">${spot.creator}</a></td>
+								</tr>
+								<tr>
+									<td><span class="label label-default">Address</span></td>
+									<td>
+										<p>${spot.address}</p>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default">Reviews</button>
+                                <c:if test="${spot.creator.equals(sessionScope.user)}">
+                                    <button class="btn btn-default btn-danger" onclick="deleteSpotById(${spot.id});">Delete Spot</button>
+                                </c:if>
+                            </div>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="thumbnail">
-						<img src="http://placehold.it/512x128" alt="512x128">
-						<table class="table">
-							<tbody>
-							<tr>
-								<td><span class="label label-default">Added By</span></td>
-								<td><a href="#">Admin123</a></td>
-							</tr>
-							<tr>
-								<td><span class="label label-default">Address</span></td>
-								<td>
-									<p>Fisherman's Wharf, Russian Hill
-										1323 Columbus Ave
-										San Francisco, CA 94133
-										Phone number (415) 292-4888
-									</p>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						<button type="button" class="btn btn-default center-block">Reviews</button>
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="thumbnail">
-						<img src="http://placehold.it/512x128" alt="512x128">
-						<table class="table">
-							<tbody>
-							<tr>
-								<td><span class="label label-default">Added By</span></td>
-								<td><a href="#">Admin123</a></td>
-							</tr>
-							<tr>
-								<td><span class="label label-default">Address</span></td>
-								<td>
-									<p>Fisherman's Wharf, Russian Hill
-										1323 Columbus Ave
-										San Francisco, CA 94133
-										Phone number (415) 292-4888
-									</p>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						<button type="button" class="btn btn-default center-block">Reviews</button>
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="thumbnail">
-						<img src="http://placehold.it/512x128" alt="512x128">
-						<table class="table">
-							<tbody>
-							<tr>
-								<td><span class="label label-default">Added By</span></td>
-								<td><a href="#">Admin123</a></td>
-							</tr>
-							<tr>
-								<td><span class="label label-default">Address</span></td>
-								<td>
-									<p>Fisherman's Wharf, Russian Hill
-										1323 Columbus Ave
-										San Francisco, CA 94133
-										Phone number (415) 292-4888
-									</p>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						<button type="button" class="btn btn-default center-block">Reviews</button>
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="thumbnail">
-						<img src="http://placehold.it/512x128" alt="512x128">
-						<table class="table caption">
-							<tbody>
-							<tr>
-								<td><span class="label label-default">Added By</span></td>
-								<td><a href="#">Admin123</a></td>
-							</tr>
-							<tr>
-								<td><span class="label label-default">Address</span></td>
-								<td>
-									<p>Fisherman's Wharf, Russian Hill
-										1323 Columbus Ave
-										San Francisco, CA 94133
-										Phone number (415) 292-4888
-									</p>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						<button type="button" class="btn btn-default center-block">Reviews</button>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 			<div class="col-md-5">
 				<div id="map"></div>

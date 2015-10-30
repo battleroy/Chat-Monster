@@ -4,8 +4,6 @@
 -- ------------------------------------------------------
 -- Server version	5.6.25-0ubuntu0.15.04.1
 
-USE workout_monster;
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -18,30 +16,6 @@ USE workout_monster;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `MEMBER`
---
-
-DROP TABLE IF EXISTS `MEMBER`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `MEMBER` (
-  `MEMBER_ID` int(11) NOT NULL,
-  `FIRST_NAME` varchar(20) NOT NULL,
-  `LAST_NAME` varchar(20) NOT NULL,
-  PRIMARY KEY (`MEMBER_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `MEMBER`
---
-
-LOCK TABLES `MEMBER` WRITE;
-/*!40000 ALTER TABLE `MEMBER` DISABLE KEYS */;
-/*!40000 ALTER TABLE `MEMBER` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `PHOTO`
 --
 
@@ -49,7 +23,7 @@ DROP TABLE IF EXISTS `PHOTO`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PHOTO` (
-  `PHOTO_ID` int(11) NOT NULL,
+  `PHOTO_ID` int(11) NOT NULL AUTO_INCREMENT,
   `PHOTO_IMAGE_BYTES` blob NOT NULL,
   `FK_SPOT_ID` int(11) NOT NULL,
   PRIMARY KEY (`PHOTO_ID`),
@@ -76,12 +50,14 @@ DROP TABLE IF EXISTS `REVIEW`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `REVIEW` (
   `REVIEW_ID` int(11) NOT NULL,
-  `FK_REVIEW_CREATOR` int(11) NOT NULL,
+  `FK_REVIEW_CREATOR` varchar(20) DEFAULT NULL,
   `REVIEW_TEXT` varchar(300) NOT NULL,
   `FK_SPOT_ID` int(11) NOT NULL,
   PRIMARY KEY (`REVIEW_ID`),
   KEY `FK_SPOT_ID` (`FK_SPOT_ID`),
-  CONSTRAINT `REVIEW_ibfk_1` FOREIGN KEY (`FK_SPOT_ID`) REFERENCES `SPOT` (`SPOT_ID`)
+  KEY `FK_REVIEW_CREATOR` (`FK_REVIEW_CREATOR`),
+  CONSTRAINT `REVIEW_ibfk_1` FOREIGN KEY (`FK_SPOT_ID`) REFERENCES `SPOT` (`SPOT_ID`),
+  CONSTRAINT `REVIEW_ibfk_2` FOREIGN KEY (`FK_REVIEW_CREATOR`) REFERENCES `USER_CREDENTIALS` (`USER_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,11 +83,11 @@ CREATE TABLE `SPOT` (
   `SPOT_ADDRESS` varchar(50) DEFAULT NULL,
   `SPOT_LATITUDE` double NOT NULL,
   `SPOT_LONGITUDE` double NOT NULL,
-  `FK_MEMBER_ID` int(11) NOT NULL,
+  `FK_USER_ID` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`SPOT_ID`),
   UNIQUE KEY `unique_SPOT_LONGITUDE_LATITUDE` (`SPOT_LONGITUDE`,`SPOT_LATITUDE`),
-  KEY `FK_MEMBER_ID` (`FK_MEMBER_ID`),
-  CONSTRAINT `SPOT_ibfk_1` FOREIGN KEY (`FK_MEMBER_ID`) REFERENCES `MEMBER` (`MEMBER_ID`)
+  KEY `FK_USER_ID` (`FK_USER_ID`),
+  CONSTRAINT `SPOT_ibfk_1` FOREIGN KEY (`FK_USER_ID`) REFERENCES `USER_CREDENTIALS` (`USER_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,6 +110,8 @@ DROP TABLE IF EXISTS `USER_CREDENTIALS`;
 CREATE TABLE `USER_CREDENTIALS` (
   `USER_NAME` varchar(20) NOT NULL,
   `PASSWORD` varchar(128) DEFAULT NULL,
+  `FIRST_NAME` varchar(20) NOT NULL,
+  `LAST_NAME` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`USER_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -155,13 +133,13 @@ DROP TABLE IF EXISTS `USER_ROLE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `USER_ROLE` (
-  `USER_ROLE_ID` int(11) NOT NULL,
+  `USER_ROLE_ID` int(11) NOT NULL AUTO_INCREMENT,
   `ROLE` varchar(20) NOT NULL,
   `FK_USER_NAME` varchar(20) NOT NULL,
   PRIMARY KEY (`USER_ROLE_ID`),
   KEY `FK_USER_NAME` (`FK_USER_NAME`),
   CONSTRAINT `USER_ROLE_ibfk_1` FOREIGN KEY (`FK_USER_NAME`) REFERENCES `USER_CREDENTIALS` (`USER_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-25 21:46:20
+-- Dump completed on 2015-10-26 16:10:01

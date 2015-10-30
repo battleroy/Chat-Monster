@@ -25,32 +25,30 @@
 					<div class="col-md-8 col-md-push-1">
 						<div id="map"></div>
 					</div>
-					<div class="col-md-2 col-md-push-1">
-						<label>Coordinates of the spot:</label>
-						<form class="form-group">
-                            <label for="inputLatitude">Latitude</label>
-							<input type="text" class="form-control" id="inputLatitude" placeholder="53.46" disabled>
-						</form>
-						<form class="form-group">
-                            <label for="inputLongitude">Longitude</label>
-							<input type="text" class="form-control" id="inputLongitude" placeholder="48.67" disabled>
-						</form>
-					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-md-push-1">
-						<form>
+						<form action="<c:url value="/createspot"/>" method="POST">
+							<label>Coordinates of the spot:</label>
+							<div class="form-group">
+								<label for="latitude">Latitude</label>
+								<input type="text" class="form-control" id="latitude" name="latitude" value="53.46" readonly>
+							</div>
+							<div class="form-group">
+								<label for="longitude">Longitude</label>
+								<input type="text" class="form-control" id="longitude" name="longitude" value="48.67" readonly>
+							</div>
 	                        <div class="form-group">
-	                            <label for="inputCreator">Creator</label>
-	                            <input type="text" class="form-control" id="inputCreator" placeholder="Admin" disabled>
+	                            <label for="creator">Creator</label>
+	                            <input type="text" class="form-control" id="creator" name="creator" value="${user}" readonly>
 	                        </div>
 	                        <div class="form-group">
-	                            <label for="inputNameOfSpot">Name of spot</label>
-	                            <input type="text" class="form-control" id="inputNameOfSpot" placeholder="Password">
+	                            <label for="name">Name of spot</label>
+	                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
 	                        </div>
 	                        <div class="form-group">
-	                        	<label for="inputReview">Your review</label>
-	                        	<textarea class="form-control" id="inputReview" cols="92" rows="10" placeholder="You can leave this empty."></textarea>
+	                        	<label for="review">Your review</label>
+	                        	<textarea class="form-control" id="review" name="review" cols="92" rows="10" placeholder="You can leave this empty."></textarea>
 	                        </div>
 	                        <button type="submit" class="btn btn-primary">Create spot</button>
 	                    </form>
