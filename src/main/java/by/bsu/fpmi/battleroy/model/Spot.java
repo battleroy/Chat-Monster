@@ -30,12 +30,6 @@ public class Spot implements Serializable {
     @JoinColumn(name = "FK_USER_ID", nullable = false)
     private User creator;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "spot", cascade = CascadeType.ALL)
-    private Set<Review> reviews = new HashSet<Review>();
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "spot", cascade = CascadeType.ALL)
-    private Set<Photo> photos = new HashSet<Photo>();
-
     public long getId() {
         return id;
     }
@@ -82,22 +76,6 @@ public class Spot implements Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
-    }
-
-    public Set<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public Set<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<Photo> photos) {
-        this.photos = photos;
     }
 
 }

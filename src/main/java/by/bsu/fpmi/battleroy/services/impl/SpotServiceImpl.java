@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Set;
 
 @Service("spotService")
 @Transactional
@@ -36,5 +37,15 @@ public class SpotServiceImpl implements SpotService {
     @Override
     public void deleteSpotById(long spotId) {
         spotDao.deleteSpotById(spotId);
+    }
+
+    @Override
+    public Set<Spot> getSpotsByUserId(String userId) {
+        return spotDao.getSpotsByUserId(userId);
+    }
+
+    @Override
+    public Set<Spot> getAllSpots() {
+        return spotDao.getAllSpots();
     }
 }

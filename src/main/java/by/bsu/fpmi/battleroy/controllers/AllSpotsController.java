@@ -36,25 +36,18 @@ public class AllSpotsController {
     public ModelAndView getMySpots(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("../../index");
         User user = (User)request.getSession().getAttribute("user");
-        modelAndView.addObject("spots", user.getSpots());
+        modelAndView.addObject("spots", spotService.getSpotsByUserId(user.getUsername()));
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/spot/{spotId}" }, method = RequestMethod.PUT)
+    @RequestMapping(value = { "/spot/{spotId}" }, method = RequestMethod.POST)
     public String deleteSpotById(@PathVariable String spotId) {
         spotService.deleteSpotById(Long.parseLong(spotId));
         return "redirect:/myspots";
     }
 
     private Set<Spot> getAllSpots() {
-        Set<User> allUsers = userService.getAllUsers();
-        Set<Spot> spots = new HashSet<Spot>();
-        for (User user : allUsers) {
-            for (Spot spot : user.getSpots()) {
-                spots.add(spot);
-            }
-        }
-        return spots;
+        return spotService.getAllSpots();
     }
 
 }

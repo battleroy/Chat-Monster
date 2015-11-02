@@ -1,9 +1,10 @@
 function deleteSpotById(spotId) {
     $.ajax({
         url: '/spot/' + spotId,
-        type: 'PUT',
+        type: 'POST',
         success: function(result) {
-            console.log('Spot ' + spotId + ' deleted')
+            console.log('Spot ' + spotId + ' deleted');
+            location.reload(true);
         }
     });
 }

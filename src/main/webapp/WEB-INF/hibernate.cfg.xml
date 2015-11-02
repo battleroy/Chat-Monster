@@ -4,6 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <mapping class="by.bsu.fpmi.battleroy.model.User"/>
         <mapping class="by.bsu.fpmi.battleroy.model.UserRole"/>
     </session-factory>

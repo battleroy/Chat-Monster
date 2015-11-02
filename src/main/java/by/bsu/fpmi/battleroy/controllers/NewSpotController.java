@@ -48,8 +48,9 @@ public class NewSpotController {
             if (reviewText != null && reviewText.length() != 0) {
                 Review review = new Review(user, newSpot, reviewText);
                 createNewReview(review);
-                newSpot.getReviews().add(review);
-                spotService.update(newSpot);
+                //newSpot.getReviews().add(review);
+                //spotService.addReviewForSpot(reviewText, newSpot, reviewText);
+                //spotService.update(newSpot);
             }
         }
         return "redirect:/myspots";

@@ -24,11 +24,11 @@ public class User implements Serializable {
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "creator", cascade = CascadeType.ALL)
-    private Set<Spot> spots = new HashSet<Spot>();
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "creator", cascade = CascadeType.ALL)
+//    private Set<Spot> spots = new HashSet<Spot>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<UserRole> userRoles = new HashSet<UserRole>();
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+//    private Set<UserRole> userRoles = new HashSet<UserRole>();
 
     public User() {
 
@@ -71,21 +71,21 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public Set<Spot> getSpots() {
-        return spots;
-    }
+//    public Set<Spot> getSpots() {
+//        return spots;
+//    }
+//
+//    public void setSpots(Set<Spot> spots) {
+//        this.spots = spots;
+//    }
 
-    public void setSpots(Set<Spot> spots) {
-        this.spots = spots;
-    }
-
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
+//    public Set<UserRole> getUserRoles() {
+//        return userRoles;
+//    }
+//
+//    public void setUserRoles(Set<UserRole> userRoles) {
+//        this.userRoles = userRoles;
+//    }
 
     @Override
     public String toString() {

@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
     private CustomPasswordEncoder passwordEncoder;
 
     @Override
+    public Set<UserRole> getUserRolesByUserId(String userId) {
+        return userDao.getUserRolesByUserId(userId);
+    }
+
+    @Override
     public void update(User user) {
 
     }
@@ -47,7 +52,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encodePassword(newUser.getPassword(), newUser.getUsername()));
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
-        user.getUserRoles().add(new UserRole(user, "USER"));
+        //user.getUserRoles().add(new UserRole(user, "USER"));
+        userDao.addUserRoleForUser(user, "USER");
         return userDao.save(user);
     }
 

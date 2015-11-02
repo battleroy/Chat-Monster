@@ -33,7 +33,7 @@
     </sec:authorize>
 	<div class="row">
 		<div class="row">
-			<div class="col-md-7">
+			<div id="spotsDiv" class="col-md-7">
 				<c:forEach var="spot" items="${spots}">
 					<div class="col-md-12">
 						<div class="thumbnail">
