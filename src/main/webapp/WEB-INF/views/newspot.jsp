@@ -11,7 +11,7 @@
 		<script src="../../static/js/jquery.js"></script>
 		<script src="../../static/js/bootstrap.min.js"></script>
 		<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-		<script src="../../static/js/yamaps.js"></script>
+		<script src="../../static/js/yamaps/yamaps-newspot.js"></script>
 	</head>
 
 	<body>
@@ -28,7 +28,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-md-push-1">
-						<form action="<c:url value="/createspot"/>" method="POST">
+						<form action="<c:url value="/createspot"/>" method="POST" enctype="multipart/form-data">
 							<label>Coordinates of the spot:</label>
 							<div class="form-group">
 								<label for="latitude">Latitude</label>
@@ -39,17 +39,21 @@
 								<input type="text" class="form-control" id="longitude" name="longitude" value="48.67" readonly>
 							</div>
 	                        <div class="form-group">
-	                            <label for="creator">Creator</label>
-	                            <input type="text" class="form-control" id="creator" name="creator" value="${user}" readonly>
-	                        </div>
-	                        <div class="form-group">
 	                            <label for="name">Name of spot</label>
 	                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
 	                        </div>
+							<div class="form-group">
+								<label for="address">Address</label>
+								<input type="text" class="form-control" id="address" name="address">
+							</div>
 	                        <div class="form-group">
 	                        	<label for="review">Your review</label>
 	                        	<textarea class="form-control" id="review" name="review" cols="92" rows="10" placeholder="You can leave this empty."></textarea>
 	                        </div>
+                            <div class="form-group">
+                                <label for="photo">Photo</label>
+                                <input type="file" class="form-control" id="photo" name="photo" accept="image/jpeg, image/png, image/gif">
+                            </div>
 	                        <button type="submit" class="btn btn-primary">Create spot</button>
 	                    </form>
                     </div>

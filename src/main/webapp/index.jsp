@@ -13,7 +13,7 @@
 	<script src="static/js/bootstrap.min.js"></script>
     <script src="static/js/deleter.js"></script>
 	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-	<script src="static/js/yamaps.js"></script>
+	<script src="static/js/yamaps/yamaps-index.js"></script>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
 				<c:forEach var="spot" items="${spots}">
 					<div class="col-md-12">
 						<div class="thumbnail">
-							<img src="http://placehold.it/512x128" alt="512x128">
+							<img src="${photos.get(spot)}" alt="512x128">
 							<table class="table">
 								<tbody>
 								<tr>
@@ -55,7 +55,8 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default">Reviews</button>
                                 <c:if test="${spot.creator.equals(sessionScope.user)}">
-                                    <button class="btn btn-default btn-danger" onclick="deleteSpotById(${spot.id});">Delete Spot</button>
+									<a class="btn btn-default" href="/spot/${spot.id}/edit">Edit Spot</a>
+									<button class="btn btn-default btn-danger" onclick="deleteSpotById(${spot.id});">Delete Spot</button>
                                 </c:if>
                             </div>
 						</div>

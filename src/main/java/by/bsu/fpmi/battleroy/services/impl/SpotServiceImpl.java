@@ -45,7 +45,17 @@ public class SpotServiceImpl implements SpotService {
     }
 
     @Override
+    public Spot getSpotBySpotId(long spotId) {
+        return spotDao.getSpotBySpotId(spotId);
+    }
+
+    @Override
     public Set<Spot> getAllSpots() {
         return spotDao.getAllSpots();
+    }
+
+    @Override
+    public boolean spotExists(long spotId) {
+        return spotDao.getSpotBySpotId(spotId) != null;
     }
 }

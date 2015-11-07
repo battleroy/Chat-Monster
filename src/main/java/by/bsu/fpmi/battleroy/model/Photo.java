@@ -19,6 +19,15 @@ public class Photo implements Serializable {
     @JoinColumn(name = "FK_SPOT_ID", nullable = false)
     private Spot spot;
 
+    public Photo() {
+
+    }
+
+    public Photo(byte[] imageBytes, Spot spot) {
+        this.imageBytes = imageBytes;
+        this.spot = spot;
+    }
+
     public byte[] getImageBytes() {
         return imageBytes;
     }

@@ -8,7 +8,7 @@ import java.util.Set;
 public interface SpotDao {
 
     Spot createNewSpot(Spot newSpot);
-    Spot getSpotById(long spotId);
+    Spot getSpotBySpotId(long spotId);
     boolean spotExists(Spot spot);
     Review createNewReview(Review review);
     void update(Spot spot);

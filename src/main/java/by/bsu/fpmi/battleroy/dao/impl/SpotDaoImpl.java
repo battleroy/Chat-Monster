@@ -4,8 +4,6 @@ import by.bsu.fpmi.battleroy.dao.SpotDao;
 import by.bsu.fpmi.battleroy.model.Review;
 import by.bsu.fpmi.battleroy.model.Spot;
 import org.hibernate.*;
-import org.hibernate.criterion.LogicalExpression;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,8 +26,12 @@ public class SpotDaoImpl implements SpotDao {
     }
 
     @Override
-    public Spot getSpotById(long spotId) {
-        return (Spot)getCurrentSession().get(Spot.class, spotId);
+    public Spot getSpotBySpotId(long spotId) {
+        Criteria criteria = getCurrentSession().createCriteria(Spot.class);
+        criteria.setFetchMode("creator", FetchMode.JOIN);
+        criteria.add(Restrictions.idEq(spotId));
+        List spotList = criteria.list();
+        return spotList.size() > 0 ? (Spot)criteria.list().get(0) : null;
     }
 
     @Override
@@ -87,6 +89,7 @@ public class SpotDaoImpl implements SpotDao {
         Object persistentInstance = getCurrentSession().load(type, id);
         if (persistentInstance != null) {
             getCurrentSession().delete(persistentInstance);
+            getCurrentSession().flush();
             return true;
         }
         return false;

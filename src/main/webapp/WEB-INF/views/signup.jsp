@@ -29,7 +29,7 @@
                     <spring:bind path="username">
                         <div class="form-group">
                             <form:label path="username">User name</form:label>
-                            <form:input type="text" class="form-control" placeholder="Usr123" path="username"/>
+                            <form:input type="text" class="form-control" placeholder="Name" path="username"/>
                         </div>
                         <div class="form-group">
                             <form:label path="password">Password</form:label>
@@ -38,12 +38,11 @@
                         </div>
                         <div class="form-group">
                             <form:label path="firstName">First name</form:label>
-                            <form:input type="text" class="form-control" placeholder="Mike" path="firstName"/>
+                            <form:input type="text" class="form-control" path="firstName"/>
                         </div>
                         <div class="form-group">
                             <form:label path="lastName">Last name</form:label>
-                            <form:input type="text" class="form-control" placeholder="Mikeoff"
-                                        path="lastName"/>
+                            <form:input type="text" class="form-control" path="lastName"/>
                         </div>
                         <button type="submit" class="btn btn-primary" id="signup-submit">Submit</button>
                         <div class="form-group" style="margin-top: 24px;">

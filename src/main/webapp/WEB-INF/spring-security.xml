@@ -23,6 +23,8 @@
 
               <logout logout-success-url="/login?logout" delete-cookies="JSESSIONID"/>
 
+           <intercept-url pattern="/spot/{spotId}/edit" access="isAuthenticated()"/>
+           <intercept-url pattern="/spot/{spotId}/save" access="isAuthenticated()"/>
            <intercept-url pattern="/login/**" access="isAnonymous()"/>
            <intercept-url pattern="/signup/**" access="isAnonymous()"/>
            <intercept-url pattern="/editspot/**" access="hasRole('USER')"/>

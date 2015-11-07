@@ -11,7 +11,8 @@
 		<script src="../../static/js/jquery.js"></script>
 		<script src="../../static/js/bootstrap.min.js"></script>
 		<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-		<script src="../../static/js/yamaps.js"></script>
+		<script src="../../static/js/yamaps/yamaps-editspot.js"></script>
+		<script src="../../static/js/deleter.js"></script>
 	</head>
 
 	<body>
@@ -25,38 +26,35 @@
 					<div class="col-md-8 col-md-push-1">
 						<div id="map"></div>
 					</div>
-					<div class="col-md-2 col-md-push-1">
-						<label>Coordinates of the spot:</label>
-						<form class="form-group">
-                            <label for="inputLatitude">Latitude</label>
-							<input type="text" class="form-control" id="inputLatitude" placeholder="53.46" disabled>
-						</form>
-						<form class="form-group">
-                            <label for="inputLongitude">Longitude</label>
-							<input type="text" class="form-control" id="inputLongitude" placeholder="48.67" disabled>
-						</form>
-					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-md-push-1">
-						<form>
+						<form action="/spot/${spot.id}/save" method="POST">
+							<label>Coordinates of the spot:</label>
+							<div class="form-group">
+								<label for="latitude">Latitude</label>
+								<input type="text" class="form-control" id="latitude" name="latitude" value="${spot.latitude}" readonly>
+							</div>
+							<div class="form-group">
+								<label for="longitude">Longitude</label>
+								<input type="text" class="form-control" id="longitude" name="longitude" value="${spot.longitude}" readonly>
+							</div>
 	                        <div class="form-group">
-	                            <label for="inputCreator">Creator</label>
-	                            <input type="text" class="form-control" id="inputCreator" placeholder="Admin" disabled>
+	                            <label for="name">Name of spot</label>
+	                            <input type="text" class="form-control" id="name" name="name" value="${spot.name}"/>
 	                        </div>
-	                        <div class="form-group">
-	                            <label for="inputNameOfSpot">Name of spot</label>
-	                            <input type="text" class="form-control" id="inputNameOfSpot" placeholder="Password">
-	                        </div>
-	                        <div class="form-group">
-	                        	<label for="inputReview">Your review</label>
-	                        	<textarea class="form-control" id="inputReview" cols="92" rows="10" placeholder="You can leave this empty.">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec magna sit amet mi lacinia venenatis quis ut justo. Nullam vel iaculis velit. Nunc dignissim, libero non semper rutrum, justo erat hendrerit diam, ut sollicitudin est risus at eros. Vivamus euismod porttitor auctor. Nunc dui ex, pharetra eget semper vitae, facilisis vel urna. Sed in sapien sapien. Nullam tempus eros sodales ullamcorper ullamcorper. Pellentesque blandit neque diam, eget ultricies tellus ultricies sit amet. Cras suscipit sagittis mauris molestie lobortis. Vivamus porta magna orci. Nunc euismod pellentesque tortor, at efficitur mauris lobortis eget. Morbi consectetur turpis id leo vestibulum, eu gravida velit finibus. Vivamus urna nulla, consectetur quis iaculis vel, mollis quis libero. Integer tincidunt mauris ac libero porttitor euismod. Suspendisse eget ultricies turpis, sit amet mattis nunc.
-								</textarea>
-	                        </div>
-                        	<button type="submit" class="btn btn-primary input">Save spot</button>
-                        	<button type="button" class="btn btn-danger input">Delete spot</button>
-	                    </form>
-                    </div>
+							<div class="form-group">
+								<label for="address">Address</label>
+								<input type="text" class="form-control" id="address" name="address">
+							</div>
+                        	<button type="submit" class="btn btn-primary">Save spot</button>
+							<button type="button" class="btn btn-default btn-danger" onclick="deleteSpotById(${spot.id});">Delete Spot</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-md-push-1">
 				</div>
 			</div>
 		</div>

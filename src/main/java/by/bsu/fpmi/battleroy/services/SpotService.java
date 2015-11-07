@@ -13,5 +13,7 @@ public interface SpotService {
     void deleteSpotById(long spotId);
     Set<Spot> getSpotsByUserId(String userId);
     Set<Spot> getAllSpots();
+    Spot getSpotBySpotId(long spotId);
+    boolean spotExists(long spotId);
 
 }
