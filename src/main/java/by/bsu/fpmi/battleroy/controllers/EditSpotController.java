@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class EditSpotController {
 
@@ -24,8 +26,8 @@ public class EditSpotController {
     }
 
     @RequestMapping(value = "/spot/{spotId}/save", method = RequestMethod.POST)
-    public String saveSpot(@ModelAttribute("spot") Spot spotDto, @PathVariable String strSpotId) {
-        Spot spotToUpdate = spotService.getSpotBySpotId(Long.parseLong(strSpotId));
+    public String saveSpot(@ModelAttribute("spot") Spot spotDto, HttpServletRequest request) {
+        Spot spotToUpdate = spotService.getSpotBySpotId(Long.parseLong(request.getParameter("spotId")));
         spotToUpdate.setAddress(spotDto.getAddress() != null ? spotDto.getAddress() : "null");
         spotToUpdate.setName(spotDto.getName());
         spotService.update(spotToUpdate);

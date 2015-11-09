@@ -55,14 +55,14 @@ public class NewSpotController {
                 Review review = new Review(user, newSpot, reviewText);
                 spotService.createNewReview(review);
             }
-        }
 
-        if (!photo.isEmpty()) {
-            try {
-                byte[] bytes = photo.getBytes();
-                photoService.addPhoto(new Photo(bytes, newSpot));
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (!photo.isEmpty()) {
+                try {
+                    byte[] bytes = photo.getBytes();
+                    photoService.addPhoto(new Photo(bytes, newSpot));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

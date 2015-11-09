@@ -10,7 +10,7 @@
 		<link href="../../static/css/app.css" rel="stylesheet">
 		<script src="../../static/js/jquery.js"></script>
 		<script src="../../static/js/bootstrap.min.js"></script>
-		<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+		<script src="../../static/js/api-maps-ya.js" type="text/javascript"></script>
 		<script src="../../static/js/yamaps/yamaps-newspot.js"></script>
 	</head>
 

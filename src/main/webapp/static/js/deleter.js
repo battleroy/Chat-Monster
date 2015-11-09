@@ -8,3 +8,11 @@ function deleteSpotById(spotId) {
         }
     });
 }
+
+$('#modalDeleteDiv').on('shown.bs.modal', function(event) {
+    console.log('event fired');
+    var button = $(event.relatedTarget);
+    var recipient = button.data('spotid');
+    var modal = $(this);
+    modal.find('#button-confirm').attr('onclick', "deleteSpotById(" + recipient + ");");
+});

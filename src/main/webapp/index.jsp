@@ -11,8 +11,7 @@
 	<link href="static/css/app.css" rel="stylesheet">
 	<script src="static/js/jquery.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
-    <script src="static/js/deleter.js"></script>
-	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+	<script src="static/js/api-maps-ya.js"></script>
 	<script src="static/js/yamaps/yamaps-index.js"></script>
 </head>
 
@@ -56,13 +55,14 @@
                                 <button type="button" class="btn btn-default">Reviews</button>
                                 <c:if test="${spot.creator.equals(sessionScope.user)}">
 									<a class="btn btn-default" href="/spot/${spot.id}/edit">Edit Spot</a>
-									<button class="btn btn-default btn-danger" onclick="deleteSpotById(${spot.id});">Delete Spot</button>
+									<button class="btn btn-default btn-danger" data-toggle="modal" data-target="#modalDeleteDiv" data-spotid="${spot.id}">Delete Spot</button>
                                 </c:if>
                             </div>
 						</div>
 					</div>
 				</c:forEach>
-			</div>
+                <c:import url="WEB-INF/views/modaldeletediv.jsp"/>
+            </div>
 			<div class="col-md-5">
 				<div id="map"></div>
 			</div>

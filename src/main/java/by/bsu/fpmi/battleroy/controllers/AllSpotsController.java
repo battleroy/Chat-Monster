@@ -36,7 +36,7 @@ public class AllSpotsController {
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/myspots**" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/myspots" }, method = RequestMethod.GET)
     public ModelAndView getMySpots(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("../../index");
         User user = (User)request.getSession().getAttribute("user");

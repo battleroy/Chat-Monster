@@ -46,15 +46,16 @@ public class UserServiceImpl implements UserService {
         if (usernameExists(newUser.getUsername())) {
             throw new NullPointerException("There is an account with that username: " + newUser.getUsername());
         }
-        final User user = new User();
+        User user = new User();
 
         user.setUsername(newUser.getUsername());
         user.setPassword(passwordEncoder.encodePassword(newUser.getPassword(), newUser.getUsername()));
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
         //user.getUserRoles().add(new UserRole(user, "USER"));
+        user = userDao.save(user);
         userDao.addUserRoleForUser(user, "USER");
-        return userDao.save(user);
+        return user;
     }
 
     private boolean usernameExists(final String name) {

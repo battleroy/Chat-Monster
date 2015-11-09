@@ -10,9 +10,8 @@
 		<link href="../../static/css/app.css" rel="stylesheet">
 		<script src="../../static/js/jquery.js"></script>
 		<script src="../../static/js/bootstrap.min.js"></script>
-		<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+		<script src="../../static/js/api-maps-ya.js" type="text/javascript"></script>
 		<script src="../../static/js/yamaps/yamaps-editspot.js"></script>
-		<script src="../../static/js/deleter.js"></script>
 	</head>
 
 	<body>
@@ -31,6 +30,7 @@
 					<div class="col-md-6 col-md-push-1">
 						<form action="/spot/${spot.id}/save" method="POST">
 							<label>Coordinates of the spot:</label>
+                            <input type="text" name="spotId" value="${spot.id}" hidden>
 							<div class="form-group">
 								<label for="latitude">Latitude</label>
 								<input type="text" class="form-control" id="latitude" name="latitude" value="${spot.latitude}" readonly>
@@ -48,7 +48,8 @@
 								<input type="text" class="form-control" id="address" name="address">
 							</div>
                         	<button type="submit" class="btn btn-primary">Save spot</button>
-							<button type="button" class="btn btn-default btn-danger" onclick="deleteSpotById(${spot.id});">Delete Spot</button>
+							<button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#modalDeleteDiv" data-spotid="${spot.id}">Delete Spot</button>
+							<c:import url="modaldeletediv.jsp"/>
 						</form>
 					</div>
 				</div>
