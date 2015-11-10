@@ -55,6 +55,11 @@ public class SpotServiceImpl implements SpotService {
     }
 
     @Override
+    public Review getReviewBySpotId(long spotId) {
+        return spotDao.getReviewBySpotId(spotId);
+    }
+
+    @Override
     public boolean spotExists(long spotId) {
         return spotDao.getSpotBySpotId(spotId) != null;
     }

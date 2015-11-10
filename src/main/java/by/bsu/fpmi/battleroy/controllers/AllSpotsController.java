@@ -1,5 +1,6 @@
 package by.bsu.fpmi.battleroy.controllers;
 
+import by.bsu.fpmi.battleroy.model.Review;
 import by.bsu.fpmi.battleroy.model.Spot;
 import by.bsu.fpmi.battleroy.model.User;
 import by.bsu.fpmi.battleroy.services.PhotoService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,10 +31,13 @@ public class AllSpotsController {
     @Autowired
     PhotoService photoService;
 
-    @RequestMapping(value = { "/" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public ModelAndView getIndex() {
         ModelAndView modelAndView = new ModelAndView("../../index");
-        modelAndView.addObject("spots", spotService.getAllSpots());
+        Set<Spot> allSpots = spotService.getAllSpots();
+        modelAndView.addObject("spots", allSpots);
+        modelAndView.addObject("photos", getPhotoLinksForSpots(allSpots));
+        modelAndView.addObject("reviews", getReviewsForSpots(allSpots));
         return modelAndView;
     }
 
@@ -43,6 +48,7 @@ public class AllSpotsController {
         Set<Spot> userSpots = spotService.getSpotsByUserId(user.getUsername());
         modelAndView.addObject("spots", userSpots);
         modelAndView.addObject("photos", getPhotoLinksForSpots(userSpots));
+        modelAndView.addObject("reviews", getReviewsForSpots(userSpots));
         return modelAndView;
     }
 
@@ -63,6 +69,14 @@ public class AllSpotsController {
             }
         }
         return photoMap;
+    }
+
+    private Map<Spot, Review> getReviewsForSpots(Set<Spot> spots) {
+        Map<Spot, Review> reviewMap = new HashMap<Spot, Review>();
+        for (Spot spot : spots) {
+            reviewMap.put(spot, spotService.getReviewBySpotId(spot.getId()));
+        }
+        return reviewMap;
     }
 
 }

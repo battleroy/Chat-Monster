@@ -77,12 +77,22 @@ public class SpotDaoImpl implements SpotDao {
     @Override
     public Set<Spot> getAllSpots() {
         Criteria criteria = getCurrentSession().createCriteria(Spot.class);
+        criteria.setFetchMode("creator", FetchMode.JOIN);
         List spots = criteria.list();
         Set<Spot> spotSet = new HashSet<Spot>();
         for (Object object : spots) {
             spotSet.add((Spot) object);
         }
         return spotSet;
+    }
+
+    @Override
+    public Review getReviewBySpotId(long spotId) {
+        Criteria criteria = getCurrentSession().createCriteria(Review.class);
+        criteria.setFetchMode("text", FetchMode.JOIN);
+        criteria.add(Restrictions.eq("spot.id", spotId));
+        List reviews = criteria.list();
+        return reviews.size() != 0 ? (Review) reviews.get(0) : null;
     }
 
     private boolean deleteById(Class<?> type, Serializable id) {

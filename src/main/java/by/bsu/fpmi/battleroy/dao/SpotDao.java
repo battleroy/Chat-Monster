@@ -15,5 +15,6 @@ public interface SpotDao {
     void deleteSpotById(long spotId);
     Set<Spot> getSpotsByUserId(String userId);
     Set<Spot> getAllSpots();
+    Review getReviewBySpotId(long spotId);
 
 }

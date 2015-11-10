@@ -2,7 +2,7 @@
 
 <footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <c:url var="index_page" value="/"/>
+        <c:url var="index_page" value="/welcome"/>
         <div class="row">
             <div class="col-md-3 sitemap">
                 <h4>Sitemap</h4>

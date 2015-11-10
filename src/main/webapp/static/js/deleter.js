@@ -10,7 +10,7 @@ function deleteSpotById(spotId) {
 }
 
 $('#modalDeleteDiv').on('shown.bs.modal', function(event) {
-    console.log('event fired');
+    console.log('modal delete event fired');
     var button = $(event.relatedTarget);
     var recipient = button.data('spotid');
     var modal = $(this);

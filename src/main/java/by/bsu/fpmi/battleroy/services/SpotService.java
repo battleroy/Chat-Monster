@@ -15,5 +15,6 @@ public interface SpotService {
     Set<Spot> getAllSpots();
     Spot getSpotBySpotId(long spotId);
     boolean spotExists(long spotId);
+    Review getReviewBySpotId(long spotId);
 
 }

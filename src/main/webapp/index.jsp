@@ -11,8 +11,8 @@
 	<link href="static/css/app.css" rel="stylesheet">
 	<script src="static/js/jquery.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
-	<script src="static/js/api-maps-ya.js"></script>
-	<script src="static/js/yamaps/yamaps-index.js"></script>
+    <script src="http://api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+    <script src="static/js/yamaps/yamaps-index.js"></script>
 </head>
 
 <body>
@@ -52,14 +52,20 @@
 								</tbody>
 							</table>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default">Reviews</button>
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#reviewCollapse${spot.id}">Review</button>
                                 <c:if test="${spot.creator.equals(sessionScope.user)}">
 									<a class="btn btn-default" href="/spot/${spot.id}/edit">Edit Spot</a>
 									<button class="btn btn-default btn-danger" data-toggle="modal" data-target="#modalDeleteDiv" data-spotid="${spot.id}">Delete Spot</button>
                                 </c:if>
                             </div>
+                            <div style="margin: 5px;">
+                                <div class="collapse" id="reviewCollapse${spot.id}">
+                                    <div class="well">${reviews.get(spot).text}</div>
+                                </div>
+                            </div>
 						</div>
 					</div>
+                    <script type="text/javascript">addPlacemark(${spot.latitude}, ${spot.longitude}, "${spot.name}")</script>
 				</c:forEach>
                 <c:import url="WEB-INF/views/modaldeletediv.jsp"/>
             </div>

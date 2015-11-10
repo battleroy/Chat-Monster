@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encodePassword(newUser.getPassword(), newUser.getUsername()));
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
-        //user.getUserRoles().add(new UserRole(user, "USER"));
         user = userDao.save(user);
         userDao.addUserRoleForUser(user, "USER");
         return user;

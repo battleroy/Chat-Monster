@@ -12,7 +12,8 @@ public class Photo implements Serializable {
     @Column(name = "PHOTO_ID")
     private long id;
 
-    @Column(name = "PHOTO_IMAGE_BYTES", nullable = false)
+    @Lob
+    @Column(name = "PHOTO_IMAGE_BYTES", nullable = false, length = 10 * 1024 * 1024)
     private byte[] imageBytes;
 
     @ManyToOne(fetch = FetchType.LAZY)
