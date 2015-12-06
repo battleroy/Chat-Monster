@@ -16,5 +16,6 @@ public interface SpotService {
     Spot getSpotBySpotId(long spotId);
     boolean spotExists(long spotId);
     Review getReviewBySpotId(long spotId);
+    Set<Spot> getNearestSpots(double latitude, double longitude);
 
 }

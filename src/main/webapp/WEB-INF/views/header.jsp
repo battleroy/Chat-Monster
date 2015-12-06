@@ -9,14 +9,15 @@
             <img src="../../static/images/logo.png" alt="Workout Monster">
         </a>
     </div>
-    <form class="navbar-form navbar-left">
+    <form class="navbar-form navbar-left" action="javascript:searchNearestSpots()">
         <div class="form-group">
             <span>
-                <input type="search" class="twitter-typeahead form-control form-search" id="placeInput" placeholder="Smolevichi">
+                <input type="search" class="twitter-typeahead form-control form-search" id="place" placeholder="Enter place">
             </span>
         </div>
-        <button class="btn btn-primary" type="submit">Search for spots!</button>
+        <button type="submit" class="btn btn-primary">Search for spots!</button>
     </form>
+    <script src="../../static/js/yamaps/yamaps-header.js"></script>
     <script type="text/javascript" src="../../static/js/typeahead/twitter-typeahead.js"></script>
     <script type="text/javascript" src="../../static/js/typeahead/input-typeahead.js"></script>
     <form class="pull-right">

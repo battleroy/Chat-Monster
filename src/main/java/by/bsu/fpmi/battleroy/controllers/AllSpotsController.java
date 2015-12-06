@@ -8,10 +8,7 @@ import by.bsu.fpmi.battleroy.services.SpotService;
 import by.bsu.fpmi.battleroy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +53,18 @@ public class AllSpotsController {
     public String deleteSpotById(@PathVariable String spotId) {
         spotService.deleteSpotById(Long.parseLong(spotId));
         return "redirect:/myspots";
+    }
+
+    @RequestMapping(value = { "/nearestSpot" }, method = RequestMethod.GET)
+    public ModelAndView getNearestSpots(
+            @RequestParam(value = "lat") double latitude,
+            @RequestParam(value = "lon") double longitude) {
+        ModelAndView modelAndView = new ModelAndView("../../index");
+        Set<Spot> nearestSpots = spotService.getNearestSpots(latitude, longitude);
+        modelAndView.addObject("spots", nearestSpots);
+        modelAndView.addObject("photos", getPhotoLinksForSpots(nearestSpots));
+        modelAndView.addObject("reviews", getReviewsForSpots(nearestSpots));
+        return modelAndView;
     }
 
     private Map<Spot, String> getPhotoLinksForSpots(Set<Spot> spots) {

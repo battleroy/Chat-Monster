@@ -43,24 +43,18 @@ public class SignupController {
         if (!result.hasErrors()) {
             registered = createUserAccount(newUser, result);
         }
-        if (registered == null) {
-            result.rejectValue("username", "message.regError", "Wrong username or password");
+        if (registered == null || result.hasErrors()) {
+            return new ModelAndView("../../WEB-INF/views/signup", "error", "Error");
         }
-        if (result.hasErrors()) {
-            return new ModelAndView("../../WEB-INF/views/signup", "user", newUser);
-        } else {
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(registered.getUsername(), newUser.getPassword());
 
-            token.setDetails(new WebAuthenticationDetails(request));
-            Authentication authentication = authManager.authenticate(token);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(registered.getUsername(), newUser.getPassword());
+        token.setDetails(new WebAuthenticationDetails(request));
+        Authentication authentication = authManager.authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+        request.getSession().setAttribute("user", registered);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-            request.getSession().setAttribute("user", registered);
-
-            return new ModelAndView("../../index");
-        }
+        return new ModelAndView("../../index");
     }
 
     private User createUserAccount(User newUser, BindingResult result) {

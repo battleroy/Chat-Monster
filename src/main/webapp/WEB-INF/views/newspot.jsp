@@ -12,6 +12,7 @@
 		<script src="../../static/js/bootstrap.min.js"></script>
 		<script src="http://api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU" type="text/javascript"></script>
 		<script src="../../static/js/yamaps/yamaps-newspot.js"></script>
+        <script src="../../static/js/validation/jquery.validate.min.js"></script>
 	</head>
 
 	<body>
@@ -28,8 +29,8 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-md-push-1">
-						<form action="<c:url value="/createspot"/>" method="POST" enctype="multipart/form-data">
-							<label>Coordinates of the spot:</label>
+						<form id="spot-form" action="<c:url value="/createspot"/>" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+							<label>Coordinates of the spot:</label>_
 							<div class="form-group">
 								<label for="latitude">Latitude</label>
 								<input type="text" class="form-control" id="latitude" name="latitude" value="53.46" readonly>
@@ -39,11 +40,11 @@
 								<input type="text" class="form-control" id="longitude" name="longitude" value="48.67" readonly>
 							</div>
 	                        <div class="form-group">
-	                            <label for="name">Name of spot</label>
-	                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+	                            <label for="name">Name of spot (required, minimum 5 characters)</label>
+	                            <input type="text" class="form-control" id="name" name="name">
 	                        </div>
 							<div class="form-group">
-								<label for="address">Address</label>
+								<label for="address">Address (required, minimum 10 characters)</label>
 								<input type="text" class="form-control" id="address" name="address">
 							</div>
 	                        <div class="form-group">
@@ -56,6 +57,7 @@
                             </div>
 	                        <button type="submit" class="btn btn-primary">Create spot</button>
 	                    </form>
+						<script src="../../static/js/validation/vld-spot.js"></script>
                     </div>
 				</div>
 			</div>

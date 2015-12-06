@@ -12,7 +12,8 @@
 		<script src="../../static/js/bootstrap.min.js"></script>
 		<script src="http://api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU"></script>
 		<script src="../../static/js/yamaps/yamaps-editspot.js"></script>
-	</head>
+        <script src="../../static/js/validation/jquery.validate.min.js"></script>
+    </head>
 
 	<body>
 		<div class="container">
@@ -28,7 +29,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-md-push-1">
-						<form action="/spot/${spot.id}/save" method="POST">
+						<form id="spot-form" action="/spot/${spot.id}/save" method="POST">
 							<label>Coordinates of the spot:</label>
                             <input type="text" name="spotId" value="${spot.id}" hidden>
 							<div class="form-group">
@@ -40,18 +41,19 @@
 								<input type="text" class="form-control" id="longitude" name="longitude" value="${spot.longitude}" readonly>
 							</div>
 	                        <div class="form-group">
-	                            <label for="name">Name of spot</label>
+	                            <label for="name">Name of spot (required, minimum 5 characters)</label>
 	                            <input type="text" class="form-control" id="name" name="name" value="${spot.name}"/>
 	                        </div>
 							<div class="form-group">
-								<label for="address">Address</label>
+								<label for="address">Address (required, minimum 10 characters)</label>
 								<input type="text" class="form-control" id="address" name="address">
 							</div>
                         	<button type="submit" class="btn btn-primary">Save spot</button>
 							<button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#modalDeleteDiv" data-spotid="${spot.id}">Delete Spot</button>
 							<c:import url="modaldeletediv.jsp"/>
 						</form>
-					</div>
+                        <script src="../../static/js/validation/vld-spot.js"></script>
+                    </div>
 				</div>
 			</div>
 			<div class="row">
